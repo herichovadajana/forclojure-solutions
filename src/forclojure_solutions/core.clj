@@ -169,6 +169,10 @@
       ((apply problem58 (butlast fns))
        (apply (last fns) args)))))
 
+(defn problem59 [& fns]
+  (fn [& args]
+    (reduce #(conj %1 (apply %2 args)) [] fns)))
+
 (defn problem61 [x y]
   (apply merge (map (fn [k v]
                       {k v})
