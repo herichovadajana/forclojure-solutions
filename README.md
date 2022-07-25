@@ -500,6 +500,16 @@ Function Composition
        (apply (last fns) args)))))
 ```
 
+##### Problem 59
+Juxtaposition
+
+```clojure
+(fn [& fns]
+  (fn [& args]
+    (reduce #(conj %1 (apply %2 args)) [] fns)))
+
+```
+
 ##### Problem 61
 Map Construction
 
