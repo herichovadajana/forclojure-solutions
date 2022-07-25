@@ -23,7 +23,7 @@
           x))
 
 (defn problem26
-  ([x] (fib x [1 1]))
+  ([x] (problem26 x [1 1]))
   ([x y] (if (= (count y) x)
            y
            (recur x (conj y (apply + (take-last 2 y)))))))
@@ -166,7 +166,7 @@
   (fn [& args]
     (if (= (count fns) 1)
       (apply (first fns) args)
-      ((apply my-comp (butlast fns))
+      ((apply problem58 (butlast fns))
        (apply (last fns) args)))))
 
 (defn problem61 [x y]
@@ -176,7 +176,7 @@
                     y)))
 
 (defn problem62 [fnc x]
-  (cons x (lazy-seq (my-iterate fnc (fnc x)))))
+  (cons x (lazy-seq (problem62 fnc (fnc x)))))
 
 
 (defn problem63 [x y]
@@ -193,7 +193,7 @@
       b
       (recur b r (rem b r)))))
 
-(defn problem81 [x]
+(defn problem81 [x y]
   (apply sorted-set
          (filter
           (fn [z]
@@ -218,7 +218,7 @@
   (let [inner-coll (first (filter coll? coll))
         is-binary (odd? (count (filter #(and (not= % true) (not= % false)) (flatten coll))))]
     (if (and is-binary (= (count inner-coll) 3))
-      (tree inner-coll)
+      (problem95 inner-coll)
       is-binary)))
 
 (defn problem97 [row]
@@ -250,7 +250,7 @@
 (defn problem118 [f s]
   (when (seq s)
     (cons (f (first s))
-          (lazy-seq (my-map f (rest s))))))
+          (lazy-seq (problem118 f (rest s))))))
 
 (defn problem120 [seq]
   (-> (fn [item]
@@ -292,7 +292,7 @@
         result (operator first-operand second-operand)]
     (if (= (count args) 3)
       result
-      (apply infix-calculator (cons result (drop 3 args))))))
+      (apply problem135 (cons result (drop 3 args))))))
 
 (defn problem143 [x y]
   (apply + (map * x y)))
