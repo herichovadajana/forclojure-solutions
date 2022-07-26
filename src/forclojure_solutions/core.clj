@@ -173,6 +173,14 @@
   (fn [& args]
     (reduce #(conj %1 (apply %2 args)) [] fns)))
 
+(defn problem60
+  ([f coll]
+   (problem60 f (first coll) (rest coll)))
+  ([f init coll]
+   (if (seq coll)
+     (cons init (lazy-seq (problem60 f (f init (first coll)) (rest coll))))
+     (list init))))
+
 (defn problem61 [x y]
   (apply merge (map (fn [k v]
                       {k v})

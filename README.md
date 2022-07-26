@@ -510,6 +510,19 @@ Juxtaposition
 
 ```
 
+##### Problem 60
+
+```clojure
+	(fn problem60
+  ([f coll]
+   (problem60 f (first coll) (rest coll)))
+  ([f init coll]
+   (if (seq coll)
+     (cons init (lazy-seq (problem60 f (f init (first coll)) (rest coll))))
+     (list init))))
+
+```
+
 ##### Problem 61
 Map Construction
 
