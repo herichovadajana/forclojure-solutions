@@ -577,6 +577,15 @@ Recurring Theme
 [7 6 5 4 3]
 ```
 
+##### Problem 70
+Word Sortinf
+
+```clojure
+(sort-by clojure.string/lower-case (-> s
+                                       (clojure.string/replace #"[.!?]" "")
+                                       (clojure.string/split #" "))))
+```
+
 ##### Problem 71
 Rearranging Code: ->
 
