@@ -177,6 +177,8 @@
   ([f coll]
    (problem60 f (first coll) (rest coll)))
   ([f init coll]
+   (println init)
+   (println coll)
    (if (seq coll)
      (cons init (lazy-seq (problem60 f (f init (first coll)) (rest coll))))
      (list init))))
@@ -204,6 +206,12 @@
     (if (= r 0)
       b
       (recur b r (rem b r)))))
+
+(defn problem70 [s]
+  (sort-by clojure.string/lower-case (-> s
+                                         (clojure.string/replace #"[.!?]" "")
+                                         (clojure.string/split #" "))))
+
 
 (defn problem81 [x y]
   (apply sorted-set
