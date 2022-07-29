@@ -199,6 +199,18 @@
                 (hash-map (x item) [item]))
               y)))
 
+
+(defn problem65 [coll]
+  (let [empty-coll (empty coll)
+        coll-with-items (conj empty-coll [1 2] [1 2] [3 4])]
+    (if (= (count coll-with-items) 3)
+      (if (= (first (conj coll-with-items [5 6])) [5 6])
+        :list
+        :vector)
+      (if (contains? coll-with-items 1)
+        :map
+        :set))))
+
 (defn problem66 [x y]
   (loop [a (max x y)
          b (min x y)
