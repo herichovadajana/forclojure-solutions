@@ -558,6 +558,21 @@ Intro to reduce
 +
 ```
 
+##### Problem 65
+Black Box Testing
+
+```clojure
+#(let [empty-coll (empty %)
+       coll-with-items (conj empty-coll [1 2] [1 2] [3 4])]
+    (if (= (count coll-with-items) 3)
+      (if (= (first (conj coll-with-items [5 6])) [5 6])
+        :list
+        :vector)
+      (if (contains? coll-with-items 1)
+        :map
+        :set))))
+```
+
 ##### Problem 66
 Greatest Common Divisor
 
