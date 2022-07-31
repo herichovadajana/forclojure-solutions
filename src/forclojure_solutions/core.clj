@@ -199,7 +199,6 @@
                 (hash-map (x item) [item]))
               y)))
 
-
 (defn problem65 [coll]
   (let [empty-coll (empty coll)
         coll-with-items (conj empty-coll [1 2] [1 2] [3 4])]
@@ -218,6 +217,16 @@
     (if (= r 0)
       b
       (recur b r (rem b r)))))
+
+(defn problem67 
+  ([count-nr] (problem67 count-nr 3 [2]))
+  ([count-nr test-nr coll]
+   (if (= (count coll) count-nr)
+     coll
+     (if (some #(integer? (/ test-nr %)) coll)
+         (problem67 count-nr (inc test-nr) coll)
+         (problem67 count-nr (inc test-nr) (conj coll test-nr))))))
+
 
 (defn problem70 [s]
   (sort-by clojure.string/lower-case (-> s
