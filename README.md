@@ -594,8 +594,8 @@ Greatest Common Divisor
    (if (= (count coll) count-nr)
      coll
      (if (some #(integer? (/ test-nr %)) coll)
-         (problem67 count-nr (inc test-nr) coll)
-         (problem67 count-nr (inc test-nr) (conj coll test-nr))))))
+         (recur count-nr (inc test-nr) coll)
+         (recur count-nr (inc test-nr) (conj coll test-nr))))))
 ```
 
 ##### Problem 68
