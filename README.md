@@ -585,6 +585,19 @@ Greatest Common Divisor
      (recur b r (rem b r))))
 ```
 
+#### Problem 67
+
+```clojure
+(fn problem67
+  ([count-nr] (problem67 count-nr 3 [2]))
+  ([count-nr test-nr coll]
+   (if (= (count coll) count-nr)
+     coll
+     (if (some #(integer? (/ test-nr %)) coll)
+         (problem67 count-nr (inc test-nr) coll)
+         (problem67 count-nr (inc test-nr) (conj coll test-nr))))))
+```
+
 ##### Problem 68
 Recurring Theme
 
