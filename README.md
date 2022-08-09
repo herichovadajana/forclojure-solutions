@@ -605,6 +605,20 @@ Recurring Theme
 [7 6 5 4 3]
 ```
 
+##### Problem 69
+Merge with a function
+
+```clojure
+(fn [f & args]
+  (into {} (map (fn [[k v]]                                                                                                                                                                                                                                                                                                
+                  {k (if (> (count (vals v)) 1)                                                                                                                                                                                                                                                                            
+                       (apply f (vals v))                                                                                                                                                                                                                                                                                  
+                       (first (vals v)))})                                                                                                                                                                                                                                                                                 
+                (->> args                                                                                                                                                                                                                                                                                                  
+                     (apply concat)                                                                                                                                                                                                                                                                                        
+                     (group-by first)))))
+```
+
 ##### Problem 70
 Word Sortinf
 
