@@ -177,8 +177,6 @@
   ([f coll]
    (problem60 f (first coll) (rest coll)))
   ([f init coll]
-   (println init)
-   (println coll)
    (if (seq coll)
      (cons init (lazy-seq (problem60 f (f init (first coll)) (rest coll))))
      (list init))))
@@ -218,7 +216,7 @@
       b
       (recur b r (rem b r)))))
 
-(defn problem67 
+(defn problem67
   ([count-nr] (problem67 count-nr 3 [2]))
   ([count-nr test-nr coll]
    (if (= (count coll) count-nr)
@@ -227,6 +225,14 @@
        (recur count-nr (inc test-nr) coll)
        (recur count-nr (inc test-nr) (conj coll test-nr))))))
 
+(defn problem69 [f & args]
+  (into {} (map (fn [[k v]]
+                  {k (if (> (count (vals v)) 1)
+                       (apply f (vals v))
+                       (first (vals v)))})
+                (->> args
+                     (apply concat)
+                     (group-by first)))))
 
 (defn problem70 [s]
   (sort-by clojure.string/lower-case (-> s
