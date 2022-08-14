@@ -641,6 +641,34 @@ Rearranging Code: ->>
 ```clojure
 reduce +
 ```
+##### Problem 74
+Filter Perfect Squares
+
+```clojure
+(fn problem74 [string-of-integers]
+  (let [lazy-prime (filter (fn [nr]
+                             (not-any? #(zero? (mod nr %))
+                                       (range 2 (dec nr)))) (iterate inc 2))]
+    (letfn [(prime-factorization
+              ([nr] (prime-factorization nr (take-while #(>= nr %) lazy-prime) []))
+              ([nr primes prime-factors]
+               (let [prime-number (first primes)
+                     quotient (/ nr prime-number)]
+                 (if (= quotient 1)
+                   (conj prime-factors prime-number)
+                   (if (integer? quotient)
+                     (recur quotient primes (conj prime-factors prime-number))
+                     (recur nr (rest primes) prime-factors))))))
+            (is-perfect-square? [nr]
+              (not-any? (fn [[k v]]
+                          (odd? v))
+                        (frequencies (prime-factorization nr))))]
+      (clojure.string/join ","
+                           (filter #(->> %
+                                         read-string
+                                         is-perfect-square?) 
+	                                (clojure.string/split string-of-integers #","))))))
+```
 
 ##### Problem 81
 Set Intersection
