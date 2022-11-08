@@ -240,6 +240,16 @@
                                          (clojure.string/split #" "))))
 
 
+(defn problem73 [board]
+  (let [[hor0 hor1 hor2] board
+        [ver0 ver1 ver2] (apply mapv vector board)
+        dia1 [(first hor0) (second hor1) (last hor2)]
+        dia2 [(first hor2) (second hor1) (last hor0)]
+        result (ffirst (filter #(= (count (set %)) 1)
+                               [hor0 hor1 hor2 ver0 ver1 ver2 dia1 dia2]))]
+    (println [hor0 hor1 hor2 ver0 ver1 ver2 dia1 dia2])
+    (if (= result :e) nil result)))
+
 (defn problem74 [string-of-integers]
   (let [lazy-prime (filter (fn [nr]
                              (not-any? #(zero? (mod nr %))
@@ -262,6 +272,13 @@
                            (filter #(->> %
                                          read-string
                                          is-perfect-square?) (clojure.string/split string-of-integers #","))))))
+
+(defn problem75 [nr]
+  (letfn [(gr-com-div [a b]
+            (if (= b 0) a (recur b (mod a b))))]
+    (->> (map #(gr-com-div % nr) (range nr))
+         (filter #(= % 1))
+         count)))
 
 (defn problem81 [x y]
   (apply sorted-set
